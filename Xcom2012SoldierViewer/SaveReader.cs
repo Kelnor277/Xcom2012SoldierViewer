@@ -479,6 +479,19 @@ namespace Xcom2012SoldierViewer
                 SaveReader.readProperty(data, Iself);
             }
         }
+
+        public List<string> getPerks()
+        {
+            List<string> perks = new List<string>();
+            for(int i = 0; i < Enum.GetNames(typeof(EPerkType)).Length; i++)
+            {
+                if (aUpgrades[i] != 0)
+                {
+                    perks.Add(Enum.GetName(typeof(EPerkType), (object)i));
+                }
+            }
+            return perks;
+        }
     }
 
     public class TClass: IDeserializable
@@ -574,6 +587,63 @@ namespace Xcom2012SoldierViewer
                 SaveReader.readProperty(data, Iself);
             }
         }
+        public string getShtRank()
+        {
+            switch(iRank)
+            {
+                case 0:
+                    return "PFC";
+                case 1:
+                    return "SPEC";
+                case 2:
+                    return "LCPL";
+                case 3:
+                    return "CPL";
+                case 4:
+                    return "SGT";
+                case 5:
+                    return "TSGT";
+                case 6:
+                    return "GSGT";
+                case 7:
+                    return "MSGT";
+                default:
+                    return "Unknown";
+            }
+        }
+
+        public string getLngRank()
+        {
+            switch (iRank)
+            {
+                case 0:
+                    return "Private First Class";
+                case 1:
+                    return "Specialist";
+                case 2:
+                    return "Lance Corporal";
+                case 3:
+                    return "Corporal";
+                case 4:
+                    return "Sergeant";
+                case 5:
+                    return "Tech Sergeant";
+                case 6:
+                    return "Gunnery Sergeant";
+                case 7:
+                    return "Master Sergeant";
+                default:
+                    return "Unknown";
+            }
+        }
+
+        //const string[] XP = {}
+
+        //public string getXPoutOF()
+        //{
+
+        //}
+
     }
 
     public class UEArray<T>: List<T>, IDeserializable
@@ -638,6 +708,11 @@ namespace Xcom2012SoldierViewer
             {
                 SaveReader.readProperty(data, Iself);
             }
+        }
+
+        public string getStatus()
+        {
+            return Enum.GetName(typeof(ESoldierStatus), (object)m_eStatus);
         }
     }
 
