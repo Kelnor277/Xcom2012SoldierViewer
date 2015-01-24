@@ -1,4 +1,4 @@
-﻿namespace Xcom2014SoldierViewer
+﻿namespace Xcom2012SoldierViewer
 {
     partial class MainGUI
     {
@@ -30,8 +30,7 @@
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.button1 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SoldierLayout = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -49,22 +48,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // listView1
+            // SoldierLayout
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.listView1.Location = new System.Drawing.Point(68, 58);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(451, 377);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.SoldierLayout.ColumnCount = 2;
+            this.SoldierLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SoldierLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SoldierLayout.Location = new System.Drawing.Point(93, 76);
+            this.SoldierLayout.Name = "SoldierLayout";
+            this.SoldierLayout.RowCount = 2;
+            this.SoldierLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SoldierLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SoldierLayout.Size = new System.Drawing.Size(559, 372);
+            this.SoldierLayout.TabIndex = 1;
             // 
             // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 551);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.SoldierLayout);
             this.Controls.Add(this.button1);
             this.Name = "MainGUI";
             this.Text = "Form1";
@@ -77,8 +79,7 @@
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.TableLayoutPanel SoldierLayout;
     }
 }
 

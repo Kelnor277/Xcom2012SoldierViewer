@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Xcom2014SoldierViewer
+namespace Xcom2012SoldierViewer
 {
     static class Program
     {

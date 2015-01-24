@@ -7,7 +7,7 @@ using LZOHelper;
 using System.IO;
 using System.Reflection;
 
-namespace Xcom2014SoldierViewer
+namespace Xcom2012SoldierViewer
 {
     public enum ESoldierStatus : byte
     {
@@ -824,9 +824,4 @@ namespace Xcom2014SoldierViewer
         }
 
     }
-
-    //class SaveObject
-    //{
-    //    string 
-    //}
 }

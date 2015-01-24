@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Xcom2014SoldierViewer
+namespace Xcom2012SoldierViewer
 {
     public partial class MainGUI : Form
     {
@@ -41,6 +41,11 @@ namespace Xcom2014SoldierViewer
             string saveFileName = Path.Combine(new string[] { Directory.GetCurrentDirectory(), Path.GetFileName(openFileDialog1.FileName) });
             SaveReader.decompress(openFileDialog1.FileName, saveFileName);
             List<XGStrategySoldier> Roster = SaveReader.parseSoldiers(saveFileName);
+        }
+
+        private void loadSoldiers()
+        {
+            
         }
     }
 }

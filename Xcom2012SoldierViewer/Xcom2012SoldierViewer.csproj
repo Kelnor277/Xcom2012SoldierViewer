@@ -7,7 +7,7 @@
     <ProjectGuid>{8E2F1C7E-A5D0-44CB-BB93-EFF2BD3DCB5F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xcom2014SoldierViewer</RootNamespace>
+    <RootNamespace>Xcom2012SoldierViewer</RootNamespace>
     <AssemblyName>Xcom2014SoldierViewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -67,6 +67,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
