@@ -5,6 +5,13 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xcom2012SoldierViewer", "Xcom2012SoldierViewer\Xcom2012SoldierViewer.csproj", "{8E2F1C7E-A5D0-44CB-BB93-EFF2BD3DCB5F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DebugBuild", "DebugBuild", "{AB01216F-7D14-4867-AA1F-469B2E41CE66}"
+	ProjectSection(SolutionItems) = preProject
+		Xcom2012SoldierViewer\bin\Debug\lzo2.dll = Xcom2012SoldierViewer\bin\Debug\lzo2.dll
+		Xcom2012SoldierViewer\bin\Debug\LZOHelper.dll = Xcom2012SoldierViewer\bin\Debug\LZOHelper.dll
+		Xcom2012SoldierViewer\bin\Debug\Xcom2014SoldierViewer.exe = Xcom2012SoldierViewer\bin\Debug\Xcom2014SoldierViewer.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

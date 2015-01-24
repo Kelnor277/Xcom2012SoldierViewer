@@ -37,6 +37,7 @@
             this.Filter = new System.Windows.Forms.Button();
             this.FilterStatus = new System.Windows.Forms.CheckedListBox();
             this.clearFilter = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SoldierLayout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,11 +156,21 @@
             this.clearFilter.UseVisualStyleBackColor = true;
             this.clearFilter.Click += new System.EventHandler(this.clearFilter_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(500, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Soldier Name";
+            // 
             // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 551);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.clearFilter);
             this.Controls.Add(this.Filter);
             this.Controls.Add(this.NameSearch);
@@ -189,6 +200,7 @@
         private System.Windows.Forms.Button Filter;
         private System.Windows.Forms.CheckedListBox FilterStatus;
         private System.Windows.Forms.Button clearFilter;
+        private System.Windows.Forms.Label label1;
     }
 }
 
