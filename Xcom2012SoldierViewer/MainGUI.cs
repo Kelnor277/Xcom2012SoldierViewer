@@ -136,8 +136,8 @@ namespace Xcom2012SoldierViewer
                     row.Cells[4].Value = perks;
                     row.Cells[4].Style.WrapMode = DataGridViewTriState.True;
                     row.Cells[5].Value = soldier.getStatus();
-                    row.Cells[6].Value = (soldier.m_iTurnsOut / 24).ToString();
-                    row.Cells[7].Value = soldier.m_iTurnsOut.ToString();
+                    row.Cells[6].Value = (soldier.m_iTurnsOut / 24);
+                    row.Cells[7].Value = soldier.m_iTurnsOut;
                 }
             }
         }
