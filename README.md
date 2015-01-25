@@ -12,12 +12,12 @@ Progress:
 Completed:
 Reversed engineered Strategy save file. (Saved from outside of a mission.)
 Parsed soldier data into memory.
+Create GUI.
+Implement search/sort features
 
 In progress:
-Create GUI.
 Figure out what the parsed data means in game.
 Write methods to convert the raw data into human readable information.
 
 Future:
-Implement search/sort features
 TBD.
