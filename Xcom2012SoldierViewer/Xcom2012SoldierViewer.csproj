@@ -115,6 +115,7 @@
     <Content Include="decompress.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="License.txt" />
     <Content Include="lzo.dll" />
     <Content Include="LZOHelper.dll" />
   </ItemGroup>

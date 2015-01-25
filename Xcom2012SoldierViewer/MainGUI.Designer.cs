@@ -180,7 +180,7 @@
             this.Controls.Add(this.SoldierLayout);
             this.Controls.Add(this.button1);
             this.Name = "MainGUI";
-            this.Text = "Form1";
+            this.Text = "XCOMSoldierViewer";
             this.Load += new System.EventHandler(this.MainGUI_Load);
             this.Resize += new System.EventHandler(this.MainGUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.SoldierLayout)).EndInit();
