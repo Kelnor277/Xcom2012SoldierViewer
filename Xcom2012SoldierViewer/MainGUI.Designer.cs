@@ -38,6 +38,14 @@
             this.FilterStatus = new System.Windows.Forms.CheckedListBox();
             this.clearFilter = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.FilterPerkText = new System.Windows.Forms.TextBox();
+            this.FilterPerks = new System.Windows.Forms.ListBox();
+            this.FilteredPerks = new System.Windows.Forms.ListBox();
+            this.AddPerk = new System.Windows.Forms.Button();
+            this.RemovePerk = new System.Windows.Forms.Button();
+            this.ClearPerks = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SoldierLayout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,7 +77,7 @@
             this.SoldierLayout.ShowCellToolTips = false;
             this.SoldierLayout.ShowEditingIcon = false;
             this.SoldierLayout.ShowRowErrors = false;
-            this.SoldierLayout.Size = new System.Drawing.Size(732, 343);
+            this.SoldierLayout.Size = new System.Drawing.Size(854, 343);
             this.SoldierLayout.TabIndex = 1;
             // 
             // FilterClass
@@ -87,7 +95,7 @@
             "Rocketeer",
             "Scout",
             "Sniper"});
-            this.FilterClass.Location = new System.Drawing.Point(119, 36);
+            this.FilterClass.Location = new System.Drawing.Point(12, 36);
             this.FilterClass.Name = "FilterClass";
             this.FilterClass.Size = new System.Drawing.Size(120, 154);
             this.FilterClass.TabIndex = 2;
@@ -105,21 +113,21 @@
             "TSGT",
             "GSGT",
             "MSGT"});
-            this.FilterRanks.Location = new System.Drawing.Point(245, 36);
+            this.FilterRanks.Location = new System.Drawing.Point(138, 36);
             this.FilterRanks.Name = "FilterRanks";
             this.FilterRanks.Size = new System.Drawing.Size(120, 154);
             this.FilterRanks.TabIndex = 3;
             // 
             // NameSearch
             // 
-            this.NameSearch.Location = new System.Drawing.Point(497, 36);
+            this.NameSearch.Location = new System.Drawing.Point(749, 53);
             this.NameSearch.Name = "NameSearch";
             this.NameSearch.Size = new System.Drawing.Size(100, 20);
             this.NameSearch.TabIndex = 4;
             // 
             // Filter
             // 
-            this.Filter.Location = new System.Drawing.Point(495, 68);
+            this.Filter.Location = new System.Drawing.Point(747, 85);
             this.Filter.Name = "Filter";
             this.Filter.Size = new System.Drawing.Size(102, 23);
             this.Filter.TabIndex = 5;
@@ -141,14 +149,14 @@
             "eStatus_Healing",
             "eStatus_Dead",
             "eStatus_Fatigued"});
-            this.FilterStatus.Location = new System.Drawing.Point(371, 36);
+            this.FilterStatus.Location = new System.Drawing.Point(264, 36);
             this.FilterStatus.Name = "FilterStatus";
             this.FilterStatus.Size = new System.Drawing.Size(120, 154);
             this.FilterStatus.TabIndex = 3;
             // 
             // clearFilter
             // 
-            this.clearFilter.Location = new System.Drawing.Point(495, 97);
+            this.clearFilter.Location = new System.Drawing.Point(747, 114);
             this.clearFilter.Name = "clearFilter";
             this.clearFilter.Size = new System.Drawing.Size(102, 23);
             this.clearFilter.TabIndex = 6;
@@ -159,17 +167,97 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(500, 19);
+            this.label1.Location = new System.Drawing.Point(752, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 7;
             this.label1.Text = "Soldier Name";
             // 
+            // FilterPerkText
+            // 
+            this.FilterPerkText.Location = new System.Drawing.Point(390, 36);
+            this.FilterPerkText.Name = "FilterPerkText";
+            this.FilterPerkText.Size = new System.Drawing.Size(152, 20);
+            this.FilterPerkText.TabIndex = 9;
+            // 
+            // FilterPerks
+            // 
+            this.FilterPerks.FormattingEnabled = true;
+            this.FilterPerks.Location = new System.Drawing.Point(390, 56);
+            this.FilterPerks.Name = "FilterPerks";
+            this.FilterPerks.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.FilterPerks.Size = new System.Drawing.Size(152, 134);
+            this.FilterPerks.TabIndex = 10;
+            // 
+            // FilteredPerks
+            // 
+            this.FilteredPerks.FormattingEnabled = true;
+            this.FilteredPerks.Location = new System.Drawing.Point(596, 56);
+            this.FilteredPerks.Name = "FilteredPerks";
+            this.FilteredPerks.Size = new System.Drawing.Size(140, 134);
+            this.FilteredPerks.TabIndex = 11;
+            // 
+            // AddPerk
+            // 
+            this.AddPerk.Location = new System.Drawing.Point(548, 85);
+            this.AddPerk.Name = "AddPerk";
+            this.AddPerk.Size = new System.Drawing.Size(42, 23);
+            this.AddPerk.TabIndex = 12;
+            this.AddPerk.Text = ">>";
+            this.AddPerk.UseVisualStyleBackColor = true;
+            this.AddPerk.Click += new System.EventHandler(this.AddPerk_Click);
+            // 
+            // RemovePerk
+            // 
+            this.RemovePerk.Location = new System.Drawing.Point(548, 114);
+            this.RemovePerk.Name = "RemovePerk";
+            this.RemovePerk.Size = new System.Drawing.Size(42, 23);
+            this.RemovePerk.TabIndex = 12;
+            this.RemovePerk.Text = "<<";
+            this.RemovePerk.UseVisualStyleBackColor = true;
+            this.RemovePerk.Click += new System.EventHandler(this.RemovePerk_Click);
+            // 
+            // ClearPerks
+            // 
+            this.ClearPerks.Location = new System.Drawing.Point(596, 36);
+            this.ClearPerks.Name = "ClearPerks";
+            this.ClearPerks.Size = new System.Drawing.Size(140, 21);
+            this.ClearPerks.TabIndex = 12;
+            this.ClearPerks.Text = "Clear";
+            this.ClearPerks.UseVisualStyleBackColor = true;
+            this.ClearPerks.Click += new System.EventHandler(this.ClearPerks_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(387, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Perks";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(627, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Filtered Perks";
+            // 
             // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 551);
+            this.ClientSize = new System.Drawing.Size(854, 551);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.RemovePerk);
+            this.Controls.Add(this.ClearPerks);
+            this.Controls.Add(this.AddPerk);
+            this.Controls.Add(this.FilteredPerks);
+            this.Controls.Add(this.FilterPerks);
+            this.Controls.Add(this.FilterPerkText);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.clearFilter);
             this.Controls.Add(this.Filter);
@@ -201,6 +289,14 @@
         private System.Windows.Forms.CheckedListBox FilterStatus;
         private System.Windows.Forms.Button clearFilter;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox FilterPerkText;
+        private System.Windows.Forms.ListBox FilterPerks;
+        private System.Windows.Forms.ListBox FilteredPerks;
+        private System.Windows.Forms.Button AddPerk;
+        private System.Windows.Forms.Button RemovePerk;
+        private System.Windows.Forms.Button ClearPerks;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

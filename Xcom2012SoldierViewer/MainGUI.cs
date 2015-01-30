@@ -41,6 +41,7 @@ namespace Xcom2012SoldierViewer
             }
             resetFilter();
             SoldierLayout.Height = this.Height - 250;
+            FilterPerks.Items.AddRange(Enum.GetNames(typeof(EPerkType)));
         }
 
         private void resetFilter()
@@ -75,6 +76,7 @@ namespace Xcom2012SoldierViewer
             List<string> Solclasses = new List<string>();
             List<string> Solranks = new List<string>();
             List<string> SolStatus = new List<string>();
+            List<string> SolPerks = new List<string>();
             //for(int x = 0; x < FilterClass.Items.Count; x++)
             //{
             //    if(FilterClass.GetItemChecked(x))
@@ -94,20 +96,37 @@ namespace Xcom2012SoldierViewer
             {
                 SolStatus.Add(chked.ToString());
             }
+            foreach (object chked in FilteredPerks.Items)
+            {
+                SolPerks.Add(chked.ToString());
+            }
             foreach(XGStrategySoldier soldier in Roster)
             {
-                bool skip = false;
                 if (!Solclasses.Contains(soldier.m_kSoldier.kClass.strName))
                 {
-                    skip = true;
+                    continue;
                 }
                 if (!Solranks.Contains(soldier.m_kSoldier.getShtRank()))
                 {
-                    skip = true;
+                    continue;
                 }
                 if (!SolStatus.Contains(soldier.getStatus()))
                 {
-                    skip = true;
+                    continue;
+                }
+                bool skip = (SolPerks.Count > 0);
+                string perks = "";
+                foreach (string st in soldier.m_kChar.getPerks())
+                {
+                    if(SolPerks.Contains(st))
+                    {
+                        skip = false;
+                    }
+                    perks += st + "\n";
+                }
+                if (skip)
+                {
+                    continue;
                 }
                 string name = soldier.m_kSoldier.strFirstName + " " + soldier.m_kSoldier.strLastName;
                 if(NameSearch.Text != string.Empty)
@@ -115,30 +134,22 @@ namespace Xcom2012SoldierViewer
                     int i = name.ToUpper().IndexOf(NameSearch.Text.ToUpper());
                     if(i < 0)
                     {
-                        skip = true;
+                        continue;
                     }
                 }
-                if (!skip)
-                {
-                    SoldierLayout.Rows.Add();
-                    DataGridViewRow row = SoldierLayout.Rows[SoldierLayout.Rows.Count - 1];
-                    row.Cells[0].Value = soldier.m_kSoldier.strFirstName + " " + soldier.m_kSoldier.strLastName;
-                    row.Cells[1].Value = soldier.m_kSoldier.getShtRank();
-                    row.Cells[2].Value = soldier.m_kSoldier.iXP.ToString();
-                    row.Cells[3].Value = soldier.m_kSoldier.kClass.strName;
-                    //ComboBox perkBox = new ComboBox();
-                    //perkBox.Items.AddRange(soldier.m_kChar.getPerks().ToArray<object>());
-                    string perks = "";
-                    foreach (string st in soldier.m_kChar.getPerks())
-                    {
-                        perks += st + "\n";
-                    }
-                    row.Cells[4].Value = perks;
-                    row.Cells[4].Style.WrapMode = DataGridViewTriState.True;
-                    row.Cells[5].Value = soldier.getStatus();
-                    row.Cells[6].Value = (soldier.m_iTurnsOut / 24);
-                    row.Cells[7].Value = soldier.m_iTurnsOut;
-                }
+                SoldierLayout.Rows.Add();
+                DataGridViewRow row = SoldierLayout.Rows[SoldierLayout.Rows.Count - 1];
+                row.Cells[0].Value = soldier.m_kSoldier.strFirstName + " " + soldier.m_kSoldier.strLastName;
+                row.Cells[1].Value = soldier.m_kSoldier.getShtRank();
+                row.Cells[2].Value = soldier.m_kSoldier.iXP.ToString();
+                row.Cells[3].Value = soldier.m_kSoldier.kClass.strName;
+                //ComboBox perkBox = new ComboBox();
+                //perkBox.Items.AddRange(soldier.m_kChar.getPerks().ToArray<object>());
+                row.Cells[4].Value = perks;
+                row.Cells[4].Style.WrapMode = DataGridViewTriState.True;
+                row.Cells[5].Value = soldier.getStatus();
+                row.Cells[6].Value = (soldier.m_iTurnsOut / 24);
+                row.Cells[7].Value = soldier.m_iTurnsOut;
             }
         }
 
@@ -157,6 +168,37 @@ namespace Xcom2012SoldierViewer
             SoldierLayout.Height = this.Height - 250;
         }
 
+        private void AddPerk_Click(object sender, EventArgs e)
+        {
+            object[] items = new object[FilterPerks.SelectedItems.Count];
+            FilterPerks.SelectedItems.CopyTo(items, 0);
+            foreach(var item in items)
+            {
+                FilteredPerks.Items.Add(item);
+                FilterPerks.Items.Remove(item);
+            }
+        }
 
+        private void RemovePerk_Click(object sender, EventArgs e)
+        {
+            object[] items = new object[FilteredPerks.SelectedItems.Count];
+            FilteredPerks.SelectedItems.CopyTo(items, 0);
+            foreach (var item in items)
+            {
+                FilterPerks.Items.Add(item);
+                FilteredPerks.Items.Remove(item);
+            }
+        }
+
+        private void ClearPerks_Click(object sender, EventArgs e)
+        {
+            object[] items = new object[FilteredPerks.Items.Count];
+            FilteredPerks.Items.CopyTo(items, 0);
+            foreach (var item in items)
+            {
+                FilterPerks.Items.Add(item);
+                FilteredPerks.Items.Remove(item);
+            }
+        }
     }
 }

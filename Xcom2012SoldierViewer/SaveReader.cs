@@ -487,7 +487,12 @@ namespace Xcom2012SoldierViewer
             {
                 if (aUpgrades[i] != 0)
                 {
-                    perks.Add(Enum.GetName(typeof(EPerkType), (object)i));
+                    string value = Enum.GetName(typeof(EPerkType), (object)i);
+                    if(aUpgrades[i] == 2)
+                    {
+                        value += " (Item)";
+                    }
+                    perks.Add(value);
                 }
             }
             return perks;
