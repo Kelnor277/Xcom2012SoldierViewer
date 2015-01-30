@@ -5,6 +5,7 @@ Will be a program to view your XCom 2012 EW Long war soldiers.
 
 WARNING:
 When running the program in the VS debugger I found a strange bug where if the program crashes, the next few XCOM saves in game end up being 0kb. This isn't a huge deal for a non-Ironman campaign, just save the game over and over in an empty slot until you get a non-0kb save file, but this could be disasterous for an Ironman game.
+(Edit here: Turns out my HDD ran out of space and that was what probably caused the 0kb save file. Ooops. I'm leaving the warning just in case I'm wrong about that though. I freed some space up and haven't had the bug happen again.)
 If you're playing ironman I highly recommend copying the save to another directory.
 
 Planned features:
