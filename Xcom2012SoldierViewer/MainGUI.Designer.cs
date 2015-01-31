@@ -46,6 +46,8 @@
             this.ClearPerks = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.FilterKIA = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SoldierLayout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -179,6 +181,7 @@
             this.FilterPerkText.Name = "FilterPerkText";
             this.FilterPerkText.Size = new System.Drawing.Size(152, 20);
             this.FilterPerkText.TabIndex = 9;
+            this.FilterPerkText.TextChanged += new System.EventHandler(this.FilterPerkText_TextChanged);
             // 
             // FilterPerks
             // 
@@ -245,11 +248,35 @@
             this.label3.TabIndex = 13;
             this.label3.Text = "Filtered Perks";
             // 
+            // FilterKIA
+            // 
+            this.FilterKIA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FilterKIA.FormattingEnabled = true;
+            this.FilterKIA.Items.AddRange(new object[] {
+            "Not Dead",
+            "Dead",
+            "Everyone"});
+            this.FilterKIA.Location = new System.Drawing.Point(238, 7);
+            this.FilterKIA.Name = "FilterKIA";
+            this.FilterKIA.Size = new System.Drawing.Size(121, 21);
+            this.FilterKIA.TabIndex = 14;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(183, 12);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "KIA Filter";
+            // 
             // MainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 551);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.FilterKIA);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.RemovePerk);
@@ -297,6 +324,8 @@
         private System.Windows.Forms.Button ClearPerks;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox FilterKIA;
+        private System.Windows.Forms.Label label4;
     }
 }
 

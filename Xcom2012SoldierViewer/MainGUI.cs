@@ -25,7 +25,7 @@ namespace Xcom2012SoldierViewer
 
         private void MainGUI_Load(object sender, EventArgs e)
         {
-
+            FilterKIA.SelectedIndex = 0;
             List<string> columns = new List<string> {"Name",
                                                     "Rank",
                                                     "XP",
@@ -128,6 +128,21 @@ namespace Xcom2012SoldierViewer
                 {
                     continue;
                 }
+                switch(FilterKIA.SelectedIndex)
+                {
+                    case 0:
+                        if(soldier.m_eStatus == ESoldierStatus.eStatus_Dead)
+                        {
+                            continue;
+                        }
+                        break;
+                    case 1:
+                        if(soldier.m_eStatus != ESoldierStatus.eStatus_Dead)
+                        {
+                            continue;
+                        }
+                        break;
+                }
                 string name = soldier.m_kSoldier.strFirstName + " " + soldier.m_kSoldier.strLastName;
                 if(NameSearch.Text != string.Empty)
                 {
@@ -174,6 +189,7 @@ namespace Xcom2012SoldierViewer
             FilterPerks.SelectedItems.CopyTo(items, 0);
             foreach(var item in items)
             {
+                
                 FilteredPerks.Items.Add(item);
                 FilterPerks.Items.Remove(item);
             }
@@ -199,6 +215,11 @@ namespace Xcom2012SoldierViewer
                 FilterPerks.Items.Add(item);
                 FilteredPerks.Items.Remove(item);
             }
+        }
+
+        private void FilterPerkText_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
