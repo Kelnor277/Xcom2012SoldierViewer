@@ -480,19 +480,20 @@ namespace Xcom2012SoldierViewer
             }
         }
 
-        public List<string> getPerks()
+        public Dictionary<EPerkType, bool> getPerks()
         {
-            List<string> perks = new List<string>();
+            Dictionary<EPerkType, bool> perks = new Dictionary<EPerkType, bool>();
             for(int i = 0; i < Enum.GetNames(typeof(EPerkType)).Length; i++)
             {
                 if (aUpgrades[i] != 0)
                 {
-                    string value = Enum.GetName(typeof(EPerkType), (object)i);
+                    EPerkType value = (EPerkType)i;
+                    bool item = false;
                     if(aUpgrades[i] == 2)
                     {
-                        value += " (Item)";
+                        item = true;
                     }
-                    perks.Add(value);
+                    perks.Add(value, item);
                 }
             }
             return perks;

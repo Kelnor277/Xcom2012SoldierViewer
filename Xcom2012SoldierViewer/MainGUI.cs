@@ -41,6 +41,11 @@ namespace Xcom2012SoldierViewer
             }
             resetFilter();
             SoldierLayout.Height = this.Height - 250;
+            List<string> perks = Enum.GetNames(typeof(EPerkType)).ToList<string>();
+            foreach(EPerkType perk in Enum.GetValues(typeof(EPerkType)))
+            {
+                FilterPerks.Items.Add(getPerk(perk).name);
+            }
             FilterPerks.Items.AddRange(Enum.GetNames(typeof(EPerkType)));
         }
 
@@ -116,12 +121,15 @@ namespace Xcom2012SoldierViewer
                 }
                 bool skip = (SolPerks.Count > 0);
                 string perks = "";
-                foreach (string st in soldier.m_kChar.getPerks())
+                foreach (KeyValuePair<EPerkType, bool> perk in soldier.m_kChar.getPerks())
                 {
+                    string st = Enum.GetName(typeof(EPerkType), (object)perk.Key);
                     if(SolPerks.Contains(st))
                     {
                         skip = false;
                     }
+                    Perk p = getPerk(perk.Key);
+                    st = p.name;
                     perks += st + "\n";
                 }
                 if (skip)
@@ -166,6 +174,17 @@ namespace Xcom2012SoldierViewer
                 row.Cells[6].Value = (soldier.m_iTurnsOut / 24);
                 row.Cells[7].Value = soldier.m_iTurnsOut;
             }
+        }
+
+        private static Perk getPerk(EPerkType ePerk)
+        {
+            Perk p;
+            Perk.LearnablePerks.TryGetValue(ePerk, out p);
+            if (p == null)
+            {
+                p = new Perk(ePerk);
+            }
+            return p;
         }
 
         private void Filter_Click(object sender, EventArgs e)
