@@ -23,30 +23,43 @@ namespace Xcom2012SoldierViewer
 
         }
 
+        private List<string> Ranks = new List<string> { "PFC",
+                                                        "SPEC",
+                                                        "LCPL",
+                                                        "CPL",
+                                                        "SGT",
+                                                        "TSGT",
+                                                        "GSGT",
+                                                        "MSGT"};
+        private List<string> columns = new List<string> {"Name",
+                                                        "Rank",
+                                                        "XP",
+                                                        "Class",
+                                                        "Perks",
+                                                        "Status",
+                                                        "Days Out",
+                                                        "Hours Out",
+                                                        };
+        List<string> PerkList = new List<string>();
+        List<string> PerkFilteredList = new List<string>();
+        List<string> PerkFilterList = new List<string>();
         private void MainGUI_Load(object sender, EventArgs e)
         {
             FilterKIA.SelectedIndex = 0;
-            List<string> columns = new List<string> {"Name",
-                                                    "Rank",
-                                                    "XP",
-                                                    "Class",
-                                                    "Perks",
-                                                    "Status",
-                                                    "Days Out",
-                                                    "Hours Out",
-                                                    };
             foreach(string st in columns)
             {
                 SoldierLayout.Columns.Add(st, st);
             }
             resetFilter();
-            SoldierLayout.Height = this.Height - 250;
+            SoldierLayout.Height = this.Height - 300;
             List<string> perks = Enum.GetNames(typeof(EPerkType)).ToList<string>();
             foreach(EPerkType perk in Enum.GetValues(typeof(EPerkType)))
             {
-                FilterPerks.Items.Add(getPerk(perk).name);
+                string name = getPerk(perk).name;
+                PerkList.Add(name);
+                PerkFilterList.Add(name);
             }
-            FilterPerks.Items.AddRange(Enum.GetNames(typeof(EPerkType)));
+            refreshPerkLBs();
         }
 
         private void resetFilter()
@@ -123,14 +136,16 @@ namespace Xcom2012SoldierViewer
                 string perks = "";
                 foreach (KeyValuePair<EPerkType, bool> perk in soldier.m_kChar.getPerks())
                 {
-                    string st = Enum.GetName(typeof(EPerkType), (object)perk.Key);
-                    if(SolPerks.Contains(st))
+                    Perk p = getPerk(perk.Key);
+                    string st = p.name;
+                    if (SolPerks.Contains(st) && !perk.Value)
                     {
                         skip = false;
                     }
-                    Perk p = getPerk(perk.Key);
-                    st = p.name;
-                    perks += st + "\n";
+                    if (!perk.Value)
+                    {
+                        perks += st + "\n";
+                    }
                 }
                 if (skip)
                 {
@@ -199,46 +214,68 @@ namespace Xcom2012SoldierViewer
 
         private void MainGUI_Resize(object sender, EventArgs e)
         {
-            SoldierLayout.Height = this.Height - 250;
+            SoldierLayout.Height = this.Height - 300;
         }
 
         private void AddPerk_Click(object sender, EventArgs e)
         {
-            object[] items = new object[FilterPerks.SelectedItems.Count];
-            FilterPerks.SelectedItems.CopyTo(items, 0);
+            List<string> items = FilterPerks.SelectedItems.Cast<string>().ToList<string>();
             foreach(var item in items)
             {
-                
-                FilteredPerks.Items.Add(item);
-                FilterPerks.Items.Remove(item);
+
+                PerkFilteredList.Add(item);
+                PerkFilterList.Remove(item);
             }
+            refreshPerkLBs();
         }
 
         private void RemovePerk_Click(object sender, EventArgs e)
         {
-            object[] items = new object[FilteredPerks.SelectedItems.Count];
-            FilteredPerks.SelectedItems.CopyTo(items, 0);
+            List<string> items = FilterPerks.SelectedItems.Cast<string>().ToList<string>();
             foreach (var item in items)
             {
-                FilterPerks.Items.Add(item);
-                FilteredPerks.Items.Remove(item);
+                PerkFilteredList.Remove(item);
+                PerkFilterList.Add(item);
             }
+            refreshPerkLBs();
         }
 
         private void ClearPerks_Click(object sender, EventArgs e)
         {
-            object[] items = new object[FilteredPerks.Items.Count];
-            FilteredPerks.Items.CopyTo(items, 0);
-            foreach (var item in items)
+            FilteredPerks.Items.Clear();
+            FilterPerks.Items.Clear();
+            PerkFilteredList.Clear();
+            PerkFilterList.Clear();
+            PerkFilterList.AddRange(PerkList);
+            refreshPerkLBs();
+        }
+
+        private void refreshPerkLBs()
+        {
+            FilterPerks.Items.Clear();
+            FilteredPerks.Items.Clear();
+            if (FilterPerkText.Text != string.Empty)
             {
-                FilterPerks.Items.Add(item);
-                FilteredPerks.Items.Remove(item);
+                string searchText = FilterPerkText.Text.ToUpper();
+                FilterPerks.Items.Clear();
+                foreach (string item in PerkFilterList)
+                {
+                    if (item.ToUpper().Contains(searchText))
+                    {
+                        FilterPerks.Items.Add(item);
+                    }
+                }
             }
+            else
+            {
+                FilterPerks.Items.AddRange(PerkFilterList.ToArray<object>());
+            }
+            FilteredPerks.Items.AddRange(PerkFilteredList.ToArray<object>());
         }
 
         private void FilterPerkText_TextChanged(object sender, EventArgs e)
         {
-
+            refreshPerkLBs();
         }
     }
 }

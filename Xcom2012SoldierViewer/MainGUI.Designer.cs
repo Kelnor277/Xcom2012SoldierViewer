@@ -72,14 +72,14 @@
             this.SoldierLayout.AllowUserToDeleteRows = false;
             this.SoldierLayout.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SoldierLayout.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.SoldierLayout.Location = new System.Drawing.Point(0, 208);
+            this.SoldierLayout.Location = new System.Drawing.Point(0, 267);
             this.SoldierLayout.Name = "SoldierLayout";
             this.SoldierLayout.ReadOnly = true;
             this.SoldierLayout.ShowCellErrors = false;
             this.SoldierLayout.ShowCellToolTips = false;
             this.SoldierLayout.ShowEditingIcon = false;
             this.SoldierLayout.ShowRowErrors = false;
-            this.SoldierLayout.Size = new System.Drawing.Size(854, 343);
+            this.SoldierLayout.Size = new System.Drawing.Size(854, 284);
             this.SoldierLayout.TabIndex = 1;
             // 
             // FilterClass
