@@ -488,11 +488,7 @@ namespace Xcom2012SoldierViewer
                 if (aUpgrades[i] != 0)
                 {
                     EPerkType value = (EPerkType)i;
-                    bool item = false;
-                    if(aUpgrades[i] == 2)
-                    {
-                        item = true;
-                    }
+                    bool item = aUpgrades[i] == 2;
                     perks.Add(value, item);
                 }
             }
@@ -826,6 +822,7 @@ namespace Xcom2012SoldierViewer
         public static void readProperty(Stream file, IDeserializable obj)
         {
             string propName = readStringFromFile(file);
+            if (propName == "m_kInjuredLoadout") propName = "m_kBackedUpLoadout"; //They seem to have changed this one over at some point, non issue.
             file.Seek(4, SeekOrigin.Current);
             string propType = readStringFromFile(file);
             file.Seek(4, SeekOrigin.Current);
