@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,24 +32,41 @@ namespace Xcom2012SoldierViewer
                                                         "TSGT",
                                                         "GSGT",
                                                         "MSGT"};
-        private List<string> columns = new List<string> {"Name",
+        private readonly List<string> columns = new List<string> {"ID","First Name","NickName","Last Name",
                                                         "Rank",
                                                         "XP",
+                                                        "PsiRank",
+                                                        "PsiXP",
                                                         "Class",
                                                         "Perks",
                                                         "Status",
                                                         "Days Out",
                                                         "Hours Out",
+                                                        "Kills"
                                                         };
-        List<string> PerkList = new List<string>();
-        List<string> PerkFilteredList = new List<string>();
-        List<string> PerkFilterList = new List<string>();
+
+        readonly List<string> PerkList = new List<string>();
+        readonly List<string> PerkFilteredList = new List<string>();
+        readonly List<string> PerkFilterList = new List<string>();
         private void MainGUI_Load(object sender, EventArgs e)
         {
             FilterKIA.SelectedIndex = 0;
-            foreach(string st in columns)
+            foreach (string st in columns)
+            {
+                if (st.Equals("Perks"))
+                    SoldierLayout.Columns.Add(new DataGridViewComboBoxColumn
+                    {
+                        HeaderText = st,
+                        Name = st,
+                        ReadOnly = false,//If the DGV, the combocolumn or the comobocell are readonly, dropdown doesn't work.
+                        FlatStyle = FlatStyle.Flat,
+                        DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox,
+                    });
+                else
             {
                 SoldierLayout.Columns.Add(st, st);
+                SoldierLayout.Columns[SoldierLayout.Columns.Count - 1].ReadOnly = true; //Non-combobox are fine to readonly
+            }
             }
             resetFilter();
             SoldierLayout.Height = this.Height - 300;
@@ -133,7 +151,7 @@ namespace Xcom2012SoldierViewer
                     continue;
                 }
                 bool skip = (SolPerks.Count > 0);
-                string perks = "";
+                List<String> perks = new List<string>();
                 foreach (KeyValuePair<EPerkType, bool> perk in soldier.m_kChar.getPerks())
                 {
                     Perk p = getPerk(perk.Key);
@@ -144,7 +162,7 @@ namespace Xcom2012SoldierViewer
                     }
                     if (!perk.Value)
                     {
-                        perks += st + "\n";
+                        perks.Add(st);
                     }
                 }
                 if (skip)
@@ -177,17 +195,26 @@ namespace Xcom2012SoldierViewer
                 }
                 SoldierLayout.Rows.Add();
                 DataGridViewRow row = SoldierLayout.Rows[SoldierLayout.Rows.Count - 1];
-                row.Cells[0].Value = soldier.m_kSoldier.strFirstName + " " + soldier.m_kSoldier.strLastName;
-                row.Cells[1].Value = soldier.m_kSoldier.getShtRank();
-                row.Cells[2].Value = soldier.m_kSoldier.iXP.ToString();
-                row.Cells[3].Value = soldier.m_kSoldier.kClass.strName;
-                //ComboBox perkBox = new ComboBox();
-                //perkBox.Items.AddRange(soldier.m_kChar.getPerks().ToArray<object>());
-                row.Cells[4].Value = perks;
-                row.Cells[4].Style.WrapMode = DataGridViewTriState.True;
-                row.Cells[5].Value = soldier.getStatus();
-                row.Cells[6].Value = (soldier.m_iTurnsOut / 24);
-                row.Cells[7].Value = soldier.m_iTurnsOut;
+                int c =0;
+                row.Cells[c++].Value = soldier.m_kSoldier.iID;
+                row.Cells[c++].Value = soldier.m_kSoldier.strFirstName;
+                row.Cells[c++].Value = (soldier.m_kSoldier.strNickName.Length == 0
+                    ? " "
+                    : " \"" + soldier.m_kSoldier.strNickName + "\" ");
+                row.Cells[c++].Value = soldier.m_kSoldier.strLastName;
+                row.Cells[c++].Value = soldier.m_kSoldier.getShtRank();
+                row.Cells[c++].Value = soldier.m_kSoldier.iXP.ToString();
+                row.Cells[c++].Value = soldier.m_kSoldier.iPsiRank.ToString();
+                row.Cells[c++].Value = soldier.m_kSoldier.iPsiXP.ToString();
+                row.Cells[c++].Value = soldier.m_kSoldier.kClass.strName;
+                ((DataGridViewComboBoxCell) row.Cells[c]).Items.AddRange(perks.ToArray());
+                if (((DataGridViewComboBoxCell)row.Cells[c]).Items.Count >0)
+                row.Cells[c].Value = ((DataGridViewComboBoxCell)row.Cells[c++]).Items[0]; //This is basically the 'selecteditem' equivalent for DGVComboboxsCells, makes them show up.
+                row.Cells[c].Style.WrapMode = DataGridViewTriState.True;
+                row.Cells[c++].Value = soldier.getStatus().Replace("eStatus_", "");
+                row.Cells[c++].Value = (soldier.m_iTurnsOut / 24);
+                row.Cells[c++].Value = soldier.m_iTurnsOut;
+                row.Cells[c++].Value = soldier.m_kSoldier.iNumKills;
             }
         }
 
@@ -195,11 +222,7 @@ namespace Xcom2012SoldierViewer
         {
             Perk p;
             Perk.LearnablePerks.TryGetValue(ePerk, out p);
-            if (p == null)
-            {
-                p = new Perk(ePerk);
-            }
-            return p;
+            return p ?? (p = new Perk(ePerk));
         }
 
         private void Filter_Click(object sender, EventArgs e)
