@@ -99,11 +99,13 @@ namespace Xcom2012SoldierViewer
         private List<XGStrategySoldier> Roster;
         private void button1_Click_1(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
-            string saveFileName = Path.Combine(new string[] { Directory.GetCurrentDirectory(), Path.GetFileName(openFileDialog1.FileName) });
-            SaveReader.decompress(openFileDialog1.FileName, saveFileName);
-            Roster = SaveReader.parseSoldiers(saveFileName);
-            loadSoldiers(Roster);
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string saveFileName = Path.Combine(new string[] { Directory.GetCurrentDirectory(), Path.GetFileName(openFileDialog1.FileName) });
+                SaveReader.decompress(openFileDialog1.FileName, saveFileName);
+                Roster = SaveReader.parseSoldiers(saveFileName);
+                loadSoldiers(Roster);
+            }
         }
 
         private void loadSoldiers(List<XGStrategySoldier>Roster)
